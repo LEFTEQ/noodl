@@ -8,16 +8,17 @@ struct ProjectSection: View {
     init(project: TodoProject, store: TodoStore) {
         self.project = project
         self.store = store
-        // Expand by default if there are open items
         self._isExpanded = State(initialValue: project.openCount > 0)
     }
 
     var body: some View {
         VStack(spacing: 0) {
-            // Section header
             Button {
                 withAnimation(.easeInOut(duration: 0.15)) {
                     isExpanded.toggle()
+                }
+                if isExpanded {
+                    store.lastExpandedProject = project
                 }
             } label: {
                 HStack(spacing: 6) {
@@ -50,20 +51,29 @@ struct ProjectSection: View {
             }
             .buttonStyle(.plain)
 
-            // Items
             if isExpanded {
                 let openItems = project.items.filter { !$0.isDone }
                 let doneItems = project.items.filter { $0.isDone }
 
                 ForEach(openItems) { item in
                     TodoRow(item: item, project: project, store: store)
+                        .transition(.asymmetric(
+                            insertion: .move(edge: .trailing).combined(with: .opacity),
+                            removal: .opacity
+                        ))
                 }
 
                 if !doneItems.isEmpty {
                     ForEach(doneItems) { item in
                         TodoRow(item: item, project: project, store: store)
+                            .transition(.opacity)
                     }
                 }
+            }
+        }
+        .onAppear {
+            if isExpanded {
+                store.lastExpandedProject = project
             }
         }
     }

@@ -1,8 +1,11 @@
 import SwiftUI
+import AppKit
 
 struct PopoverView: View {
     var store: TodoStore
-    @State private var showAddTodo = false
+    @State private var showAddForm = false
+    @State private var activeSection: NoodlSection = .todos
+    @State private var keyMonitor: Any?
     @Environment(\.openSettings) private var openSettings
 
     var body: some View {
@@ -13,14 +16,17 @@ struct PopoverView: View {
                     .font(.headline)
                     .fontWeight(.bold)
                 Spacer()
+
                 Button {
-                    showAddTodo.toggle()
+                    withAnimation(.easeInOut(duration: 0.15)) {
+                        showAddForm.toggle()
+                    }
                 } label: {
                     Image(systemName: "plus")
                         .font(.system(size: 14, weight: .medium))
                 }
                 .buttonStyle(.plain)
-                .help("Add todo")
+                .help("Add item")
 
                 Button {
                     openSettings()
@@ -34,62 +40,44 @@ struct PopoverView: View {
             .padding(.horizontal, 12)
             .padding(.vertical, 10)
 
+            // Pill bar
+            PillBar(
+                todoCount: store.totalOpen,
+                snippetCount: store.snippets.count,
+                commandCount: store.commands.count,
+                activeSection: activeSection
+            ) { section in
+                activeSection = section
+            }
+
             Divider()
 
-            // Add todo inline form
-            if showAddTodo {
-                AddTodoView(store: store, isShowing: $showAddTodo)
+            // Unified add form
+            if showAddForm {
+                UnifiedAddView(store: store, isShowing: $showAddForm)
                 Divider()
             }
 
-            // Project list
-            if store.projects.isEmpty {
-                VStack(spacing: 8) {
-                    Image(systemName: "tray")
-                        .font(.largeTitle)
-                        .foregroundStyle(.secondary)
-                    Text("No projects found")
-                        .foregroundStyle(.secondary)
-                    Text(store.directoryURL.path(percentEncoded: false))
-                        .font(.caption2)
-                        .foregroundStyle(.tertiary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else {
-                ScrollView {
-                    LazyVStack(spacing: 0, pinnedViews: []) {
-                        ForEach(store.projects) { project in
-                            ProjectSection(project: project, store: store)
-                        }
+            // Stream
+            StreamView(store: store, activeSection: $activeSection)
+        }
+        .onAppear {
+            keyMonitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
+                if event.modifierFlags.contains(.command),
+                   event.charactersIgnoringModifiers == "v",
+                   !showAddForm {
+                    if store.pasteAsTodo() != nil {
+                        return nil
                     }
-                    .padding(.vertical, 4)
                 }
+                return event
             }
-
-            Divider()
-
-            // Footer
-            HStack {
-                Text("Open: \(store.totalOpen)")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                Text("·")
-                    .foregroundStyle(.tertiary)
-                Text("Done: \(store.totalDone)")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                Spacer()
-                Button("Reload") {
-                    store.reload()
-                }
-                .font(.caption)
-                .buttonStyle(.plain)
-                .foregroundStyle(.secondary)
+        }
+        .onDisappear {
+            if let keyMonitor {
+                NSEvent.removeMonitor(keyMonitor)
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
+            keyMonitor = nil
         }
     }
 }
