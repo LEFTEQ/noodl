@@ -3,8 +3,10 @@ import ServiceManagement
 
 struct SettingsView: View {
     var store: TodoStore
+    var hotkey: GlobalHotkey
     @State private var directoryPath = ""
     @State private var launchAtLogin = false
+    @State private var isRecordingHotkey = false
 
     var body: some View {
         Form {
@@ -12,22 +14,39 @@ struct SettingsView: View {
                 HStack {
                     TextField("Noodl directory", text: $directoryPath)
                         .textFieldStyle(.roundedBorder)
-
-                    Button("Browse…") {
-                        browsForDirectory()
-                    }
+                    Button("Browse…") { browseForDirectory() }
                 }
-
                 Text("Markdown files in this directory become projects.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
 
+            Section("Global Hotkey") {
+                HStack {
+                    Text("Open Noodl")
+                    Spacer()
+                    if isRecordingHotkey {
+                        Text("Press shortcut…")
+                            .foregroundStyle(.orange)
+                            .font(.caption)
+                    } else {
+                        Text(hotkey.shortcutDescription)
+                            .foregroundStyle(.secondary)
+                    }
+                    Button(isRecordingHotkey ? "Cancel" : "Record") {
+                        isRecordingHotkey.toggle()
+                    }
+                    .controlSize(.small)
+                    if hotkey.isEnabled {
+                        Button("Clear") { hotkey.clearShortcut() }
+                            .controlSize(.small)
+                    }
+                }
+            }
+
             Section("Startup") {
                 Toggle("Launch at Login", isOn: $launchAtLogin)
-                    .onChange(of: launchAtLogin) { _, newValue in
-                        setLaunchAtLogin(newValue)
-                    }
+                    .onChange(of: launchAtLogin) { _, newValue in setLaunchAtLogin(newValue) }
             }
 
             Section("About") {
@@ -53,18 +72,30 @@ struct SettingsView: View {
             launchAtLogin = (try? SMAppService.mainApp.status == .enabled) ?? false
         }
         .onChange(of: directoryPath) { _, newPath in
-            let url = URL(filePath: newPath)
-            store.updateDirectory(url)
+            store.updateDirectory(URL(filePath: newPath))
+        }
+        .task(id: isRecordingHotkey) {
+            guard isRecordingHotkey else { return }
+            let monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
+                let mods = event.modifierFlags.intersection([.control, .option, .shift, .command])
+                guard !mods.isEmpty else { return event }
+                self.hotkey.setShortcut(flags: event.modifierFlags, code: event.keyCode)
+                self.isRecordingHotkey = false
+                return nil
+            }
+            while isRecordingHotkey {
+                try? await Task.sleep(for: .milliseconds(100))
+            }
+            if let monitor { NSEvent.removeMonitor(monitor) }
         }
     }
 
-    private func browsForDirectory() {
+    private func browseForDirectory() {
         let panel = NSOpenPanel()
         panel.canChooseDirectories = true
         panel.canChooseFiles = false
         panel.allowsMultipleSelection = false
         panel.prompt = "Select"
-
         if panel.runModal() == .OK, let url = panel.url {
             directoryPath = url.path(percentEncoded: false)
         }
@@ -72,13 +103,8 @@ struct SettingsView: View {
 
     private func setLaunchAtLogin(_ enabled: Bool) {
         do {
-            if enabled {
-                try SMAppService.mainApp.register()
-            } else {
-                try SMAppService.mainApp.unregister()
-            }
-        } catch {
-            // Silently fail — launch at login requires proper app signing/notarization
-        }
+            if enabled { try SMAppService.mainApp.register() }
+            else { try SMAppService.mainApp.unregister() }
+        } catch {}
     }
 }

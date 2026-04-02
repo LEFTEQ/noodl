@@ -3,11 +3,12 @@ import SwiftUI
 @main
 struct NoodlApp: App {
     @State private var store = TodoStore()
+    @State private var hotkey = GlobalHotkey()
 
     var body: some Scene {
         MenuBarExtra {
             PopoverView(store: store)
-                .frame(width: 320, height: 480)
+                .frame(width: 320, height: 520)
         } label: {
             HStack(spacing: 4) {
                 Image(systemName: "checklist")
@@ -20,7 +21,7 @@ struct NoodlApp: App {
         .menuBarExtraStyle(.window)
 
         Settings {
-            SettingsView(store: store)
+            SettingsView(store: store, hotkey: hotkey)
         }
     }
 }
