@@ -5,12 +5,9 @@ struct SnippetRow: View {
     let snippet: Snippet
     var store: TodoStore
     @State private var copied = false
+    @State private var isEditing = false
     @State private var editingTitle: String = ""
     @FocusState private var isEditingFocused: Bool
-
-    private var isEditing: Bool {
-        store.editingSnippetId == snippet.id
-    }
 
     var body: some View {
         HStack(spacing: 8) {
@@ -69,8 +66,7 @@ struct SnippetRow: View {
             }
 
             Button {
-                editingTitle = snippet.title
-                store.editingSnippetId = snippet.id
+                startEditing()
             } label: {
                 Label("Rename", systemImage: "pencil")
             }
@@ -83,15 +79,11 @@ struct SnippetRow: View {
                 Label("Delete", systemImage: "trash")
             }
         }
-        .onChange(of: isEditing) { _, editing in
-            if editing {
-                editingTitle = snippet.title
-                isEditingFocused = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    if store.editingSnippetId == snippet.id {
-                        commitRename()
-                    }
-                }
+        .onAppear {
+            // Auto-enter edit mode for newly pasted snippets
+            if store.editingSnippetId == snippet.id {
+                store.editingSnippetId = nil
+                startEditing()
             }
         }
         .transition(.asymmetric(
@@ -100,12 +92,23 @@ struct SnippetRow: View {
         ))
     }
 
+    private func startEditing() {
+        editingTitle = snippet.title
+        isEditing = true
+        isEditingFocused = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            if isEditing {
+                commitRename()
+            }
+        }
+    }
+
     private func commitRename() {
+        guard isEditing else { return }
+        isEditing = false
         let name = editingTitle.trimmingCharacters(in: .whitespaces)
-        if !name.isEmpty {
+        if !name.isEmpty && name != snippet.title {
             store.renameSnippet(snippet, to: name)
-        } else {
-            store.editingSnippetId = nil
         }
     }
 }
