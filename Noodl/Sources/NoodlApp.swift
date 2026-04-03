@@ -8,7 +8,7 @@ struct NoodlApp: App {
     var body: some Scene {
         MenuBarExtra {
             PopoverView(store: store)
-                .frame(width: 320, height: 520)
+                .frame(width: 480, height: 520)
         } label: {
             HStack(spacing: 4) {
                 Image(systemName: "checklist")
