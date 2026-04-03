@@ -10,7 +10,6 @@ struct NoodlApp: App {
     )
     @State private var screenshotService = ScreenshotService()
     @State private var voiceRecorder = VoiceRecorder()
-    @State private var configured = false
 
     var body: some Scene {
         MenuBarExtra {
@@ -22,12 +21,10 @@ struct NoodlApp: App {
             )
             .frame(width: 480, height: 520)
             .onAppear {
-                if !configured {
-                    screenshotService.configure(memoryStore: memoryStore)
-                    screenshotService.hotkey.onTrigger = { [screenshotService] in
-                        screenshotService.takeScreenshot()
-                    }
-                    configured = true
+                memoryStore.startIfNeeded()
+                screenshotService.configure(memoryStore: memoryStore)
+                screenshotService.hotkey.onTrigger = { [screenshotService] in
+                    screenshotService.takeScreenshot()
                 }
             }
         } label: {

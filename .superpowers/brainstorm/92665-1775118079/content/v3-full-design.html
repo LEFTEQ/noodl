@@ -1,0 +1,172 @@
+<h2>Noodl v3 — Full Design</h2>
+<p class="subtitle">Two-column daily capture hub + persistent tools. Review and approve.</p>
+
+<div class="section">
+  <h3>Layout — 480px, 40/60 Split</h3>
+  <div class="mockup">
+    <div class="mockup-header">Noodl v3</div>
+    <div class="mockup-body" style="padding:0;font-family:-apple-system,system-ui,sans-serif;font-size:11px;display:flex;height:400px;width:100%">
+      <!-- LEFT: Memory -->
+      <div style="width:38%;border-right:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column">
+        <div style="padding:10px 10px 6px;border-bottom:1px solid rgba(255,255,255,0.06)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:9px;text-transform:uppercase;letter-spacing:0.8px;opacity:0.4">📎 Today's Memory</span>
+            <span style="font-size:8px;opacity:0.25">02.04.2026</span>
+          </div>
+        </div>
+        <div style="flex:1;overflow:auto;padding:6px 8px">
+          <!-- Clips -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+            <span style="font-size:8px;text-transform:uppercase;opacity:0.3">Clips (3/10)</span>
+            <span style="font-size:8px;opacity:0.2;cursor:pointer">Clear</span>
+          </div>
+          <div style="padding:4px 6px;margin-bottom:2px;border-radius:4px;background:rgba(255,200,50,0.06);display:flex;align-items:center;gap:4px;cursor:pointer">
+            <span style="flex:1;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">ssh deploy@116.202.15.49</span>
+            <span style="font-size:8px;opacity:0.25">2m</span>
+            <span style="font-size:9px;opacity:0.2;cursor:pointer">✕</span>
+          </div>
+          <div style="padding:4px 6px;margin-bottom:2px;border-radius:4px;display:flex;align-items:center;gap:4px;cursor:pointer">
+            <span style="flex:1;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">const API_URL = "https://api..."</span>
+            <span style="font-size:8px;opacity:0.25">5m</span>
+            <span style="font-size:9px;opacity:0.2;cursor:pointer">✕</span>
+          </div>
+          <div style="padding:4px 6px;margin-bottom:2px;border-radius:4px;display:flex;align-items:center;gap:4px;cursor:pointer">
+            <span style="flex:1;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Fix booking flow edge case when...</span>
+            <span style="font-size:8px;opacity:0.25">12m</span>
+            <span style="font-size:9px;opacity:0.2;cursor:pointer">✕</span>
+          </div>
+
+          <!-- Screenshots -->
+          <div style="font-size:8px;text-transform:uppercase;opacity:0.3;margin-top:10px;margin-bottom:4px">Screenshots (2)</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+            <div style="aspect-ratio:16/10;background:rgba(100,149,237,0.08);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer">
+              <span style="font-size:18px;opacity:0.3">🖼</span>
+              <span style="font-size:7px;opacity:0.3;margin-top:2px">14:30</span>
+            </div>
+            <div style="aspect-ratio:16/10;background:rgba(100,149,237,0.08);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer">
+              <span style="font-size:18px;opacity:0.3">🖼</span>
+              <span style="font-size:7px;opacity:0.3;margin-top:2px">15:45</span>
+            </div>
+          </div>
+
+          <!-- Voice -->
+          <div style="font-size:8px;text-transform:uppercase;opacity:0.3;margin-top:10px;margin-bottom:4px">Voice (1)</div>
+          <div style="padding:4px 8px;border-radius:4px;background:rgba(255,100,100,0.06);display:flex;align-items:center;gap:6px;cursor:pointer">
+            <span style="font-size:10px">🎙</span>
+            <span style="font-size:10px">0:42</span>
+            <div style="flex:1;height:3px;background:rgba(255,255,255,0.1);border-radius:2px">
+              <div style="width:0%;height:100%;background:rgba(255,100,100,0.4);border-radius:2px"></div>
+            </div>
+          </div>
+
+          <!-- Record button -->
+          <div style="margin-top:8px;text-align:center">
+            <span style="padding:4px 16px;border-radius:12px;background:rgba(255,100,100,0.1);font-size:10px;color:#e55;cursor:pointer">🎤 Record</span>
+          </div>
+        </div>
+        <!-- Date nav -->
+        <div style="padding:6px 8px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:9px;opacity:0.3;cursor:pointer">◀ Yesterday</span>
+          <span style="font-size:9px;opacity:0.4">Today</span>
+          <span style="font-size:9px;opacity:0.15">Tomorrow ▶</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: Tools -->
+      <div style="width:62%;display:flex;flex-direction:column">
+        <div style="padding:10px 10px 6px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.06)">
+          <strong style="font-size:14px">Noodl</strong>
+          <div style="display:flex;gap:8px;opacity:0.4;font-size:13px"><span>+</span><span>⚙</span></div>
+        </div>
+        <div style="display:flex;gap:3px;padding:5px 8px;justify-content:center">
+          <span style="padding:1px 7px;background:rgba(100,149,237,0.2);border-radius:8px;font-size:9px;color:cornflowerblue">☑ 5</span>
+          <span style="padding:1px 7px;border-radius:8px;font-size:9px;opacity:0.35">📋 3</span>
+          <span style="padding:1px 7px;border-radius:8px;font-size:9px;opacity:0.35">⚡ 5</span>
+        </div>
+        <div style="flex:1;overflow:auto;padding:6px 8px;font-size:10px">
+          <div style="opacity:0.3;font-size:8px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px">☑ Todos</div>
+          <div style="padding-left:4px">
+            <div style="opacity:0.6;font-size:10px;cursor:pointer">▼ FixIt (2)</div>
+            <div style="padding-left:14px;padding:2px 0;display:flex;align-items:center;gap:4px;cursor:pointer">
+              <span style="opacity:0.4;font-size:11px">○</span>
+              <span>Fix geolocation drift</span>
+              <span style="font-size:8px;background:rgba(238,85,85,0.15);color:#e55;padding:0px 4px;border-radius:6px">high</span>
+              <span style="margin-left:auto;opacity:0.15;font-size:9px">⧉</span>
+            </div>
+            <div style="padding-left:14px;padding:2px 0;display:flex;align-items:center;gap:4px;cursor:pointer">
+              <span style="opacity:0.4;font-size:11px">○</span>
+              <span>Update push tokens</span>
+              <span style="margin-left:auto;opacity:0.15;font-size:9px">⧉</span>
+            </div>
+            <div style="opacity:0.6;font-size:10px;cursor:pointer;margin-top:2px">▸ Inbox (3)</div>
+          </div>
+          <div style="opacity:0.3;font-size:8px;text-transform:uppercase;letter-spacing:0.5px;margin-top:10px;margin-bottom:3px">📋 Snippets</div>
+          <div style="padding-left:4px">
+            <div style="padding:2px 0;display:flex;align-items:center;gap:4px;cursor:pointer">
+              <span style="opacity:0.2;font-size:9px">⧉</span>
+              <span>SSH VPS</span>
+              <span style="opacity:0.25;font-size:9px;font-family:monospace">ssh deploy@...</span>
+            </div>
+            <div style="padding:2px 0;display:flex;align-items:center;gap:4px;cursor:pointer">
+              <span style="opacity:0.2;font-size:9px">⧉</span>
+              <span>Docker Restart</span>
+              <span style="opacity:0.25;font-size:9px;font-family:monospace">docker com...</span>
+            </div>
+          </div>
+          <div style="opacity:0.3;font-size:8px;text-transform:uppercase;letter-spacing:0.5px;margin-top:10px;margin-bottom:3px">⚡ Commands</div>
+          <div style="padding-left:4px">
+            <div style="padding:2px 0;display:flex;align-items:center;gap:4px;cursor:pointer">
+              <span style="opacity:0.3;font-size:9px">▶</span>
+              <span>Deploy Status</span>
+            </div>
+            <div style="padding:2px 0;display:flex;align-items:center;gap:4px;cursor:pointer">
+              <span style="color:#b794f6;font-size:9px">✦</span>
+              <span>Analyze Errors</span>
+              <span style="font-size:7px;background:rgba(183,148,246,0.15);color:#b794f6;padding:0 3px;border-radius:4px">AI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Features summary -->
+<div class="section">
+  <h3>Complete Feature Set</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:11px;font-family:monospace;line-height:1.8">
+    <div>
+      <div style="opacity:0.4;font-size:10px;text-transform:uppercase;margin-bottom:4px">Memory (Left Column)</div>
+      <div><span style="color:#daa520">●</span> Clipboard history (10 max, Cmd+V)</div>
+      <div><span style="color:#daa520">●</span> Screenshots (global shortcut → screencapture)</div>
+      <div><span style="color:#daa520">●</span> Voice recording (built-in AVAudioRecorder)</div>
+      <div><span style="color:#daa520">●</span> Date navigation (← yesterday / today →)</div>
+      <div><span style="color:#daa520">●</span> Session-persistent, daily folders</div>
+      <div><span style="color:#daa520">●</span> Single click clip = copy, double = copy + remove</div>
+    </div>
+    <div>
+      <div style="opacity:0.4;font-size:10px;text-transform:uppercase;margin-bottom:4px">Tools (Right Column)</div>
+      <div><span style="color:cornflowerblue">●</span> Todos (projects, priorities, toggle)</div>
+      <div><span style="color:cornflowerblue">●</span> Snippets (click to copy)</div>
+      <div><span style="color:cornflowerblue">●</span> Commands (shell + AI, run inline)</div>
+      <div><span style="color:cornflowerblue">●</span> Pill bar for quick-jump</div>
+      <div><span style="color:cornflowerblue">●</span> Unified [+] form (todo/snippet/command)</div>
+      <div><span style="color:cornflowerblue">●</span> Collapsible sections (persistent)</div>
+    </div>
+  </div>
+  <div style="margin-top:12px;font-size:11px;font-family:monospace;line-height:1.8">
+    <div style="opacity:0.4;font-size:10px;text-transform:uppercase;margin-bottom:4px">Global</div>
+    <div><span style="color:#8f8">●</span> Global hotkey to open Noodl</div>
+    <div><span style="color:#8f8">●</span> Global screenshot shortcut</div>
+    <div><span style="color:#8f8">●</span> 480px popover, 40/60 split</div>
+    <div><span style="color:#8f8">●</span> Inline animations (no toasts)</div>
+  </div>
+  <div style="margin-top:12px;font-size:11px;font-family:monospace;line-height:1.8">
+    <div style="opacity:0.4;font-size:10px;text-transform:uppercase;margin-bottom:4px">Claude Code Commands</div>
+    <div><span style="color:#f0f">●</span> /noodl:todo — manage todos</div>
+    <div><span style="color:#f0f">●</span> /noodl:snippet — manage snippets</div>
+    <div><span style="color:#f0f">●</span> /noodl:command — manage commands</div>
+    <div><span style="color:#f0f">●</span> /noodl:memory — summarize + Q&A daily captures</div>
+    <div><span style="color:#f0f">●</span> /noodl:clip — list/clear clipboard history</div>
+  </div>
+</div>

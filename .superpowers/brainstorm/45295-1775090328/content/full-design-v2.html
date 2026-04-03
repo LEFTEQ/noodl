@@ -1,0 +1,144 @@
+<h2>Noodl v2 — Updated Design</h2>
+<p class="subtitle">Simplified paste (always todo) + unified [+] add form</p>
+
+<!-- Layout mockup -->
+<div class="section">
+  <h3>Final Layout</h3>
+  <div class="mockup">
+    <div class="mockup-header">Noodl v2 — Unified Stream</div>
+    <div class="mockup-body" style="padding:14px;font-family:-apple-system,system-ui,sans-serif;font-size:12px;line-height:1.5">
+      <!-- Header -->
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.1)">
+        <strong style="font-size:15px">Noodl</strong>
+        <div style="display:flex;gap:10px;opacity:0.5;font-size:14px"><span>+</span><span>⚙</span></div>
+      </div>
+      <!-- Pill bar -->
+      <div style="display:flex;gap:4px;padding:6px 0;justify-content:center">
+        <div style="padding:2px 10px;background:rgba(100,149,237,0.2);border-radius:10px;font-size:10px;color:cornflowerblue;cursor:pointer">☑ 5</div>
+        <div style="padding:2px 10px;border-radius:10px;font-size:10px;opacity:0.35;cursor:pointer">📋 3</div>
+        <div style="padding:2px 10px;border-radius:10px;font-size:10px;opacity:0.35;cursor:pointer">⚡ 5</div>
+      </div>
+      <!-- TODOS section -->
+      <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:0.8px">☑ Todos</span>
+          <span style="opacity:0.2;font-size:10px;cursor:pointer">▾</span>
+        </div>
+        <div style="margin-left:4px">
+          <div style="opacity:0.6;font-size:11px;cursor:pointer">▼ FixIt (2)</div>
+          <div style="padding:3px 0 3px 16px;font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer">
+            <span style="opacity:0.4">○</span> Fix geolocation drift
+            <span style="font-size:9px;background:rgba(238,85,85,0.15);color:#e55;padding:1px 5px;border-radius:8px">high</span>
+            <span style="margin-left:auto;opacity:0.2;font-size:10px">⧉</span>
+          </div>
+          <div style="padding:3px 0 3px 16px;font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer">
+            <span style="opacity:0.4">○</span> Update push tokens
+            <span style="margin-left:auto;opacity:0.2;font-size:10px">⧉</span>
+          </div>
+          <div style="opacity:0.6;font-size:11px;cursor:pointer;margin-top:4px">▸ Inbox (3)</div>
+        </div>
+      </div>
+      <!-- SNIPPETS section -->
+      <div style="padding-top:10px;margin-top:6px;border-top:1px solid rgba(255,255,255,0.06)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:0.8px">📋 Snippets</span>
+          <span style="opacity:0.2;font-size:10px;cursor:pointer">▾</span>
+        </div>
+        <div style="margin-left:4px">
+          <div style="padding:3px 0;font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer">
+            <span style="opacity:0.3;font-size:10px">⧉</span>
+            <span>SSH VPS</span>
+            <span style="opacity:0.3;font-size:10px;font-family:monospace">ssh deploy@116...</span>
+          </div>
+          <div style="padding:3px 0;font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer">
+            <span style="opacity:0.3;font-size:10px">⧉</span>
+            <span>Docker Restart</span>
+            <span style="opacity:0.3;font-size:10px;font-family:monospace">docker compose...</span>
+          </div>
+        </div>
+      </div>
+      <!-- COMMANDS section -->
+      <div style="padding-top:10px;margin-top:6px;border-top:1px solid rgba(255,255,255,0.06)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:0.8px">⚡ Commands</span>
+          <span style="opacity:0.2;font-size:10px;cursor:pointer">▾</span>
+        </div>
+        <div style="margin-left:4px">
+          <div style="padding:3px 0;font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer">
+            <span style="opacity:0.4;font-size:10px">▶</span>
+            <span>Deploy Status</span>
+          </div>
+          <div style="padding:3px 0;font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer">
+            <span style="opacity:0.4;font-size:10px">▶</span>
+            <span>Crypto Logs</span>
+          </div>
+          <div style="padding:3px 0;font-size:12px;display:flex;align-items:center;gap:6px;cursor:pointer">
+            <span style="font-size:10px;color:#b794f6">✦</span>
+            <span>Analyze Errors</span>
+            <span style="font-size:8px;background:rgba(183,148,246,0.15);color:#b794f6;padding:1px 4px;border-radius:6px">AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Paste + Add behavior -->
+<div class="section">
+  <h3>Interactions</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div class="mockup">
+      <div class="mockup-header" style="font-size:11px">Cmd+V — Always a Todo</div>
+      <div class="mockup-body" style="padding:12px;font-family:monospace;font-size:11px;line-height:1.7">
+        <div>1. Clipboard text captured</div>
+        <div>2. Find last expanded project</div>
+        <div>3. Add as todo → <span style="color:cornflowerblue">slide-in animation</span></div>
+        <div>4. Falls back to Inbox if none expanded</div>
+        <div style="margin-top:8px;opacity:0.5;font-size:10px">Works anywhere in the stream.<br>No scroll-position detection needed.</div>
+      </div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-header" style="font-size:11px">[+] Button — Type Picker</div>
+      <div class="mockup-body" style="padding:12px;font-family:monospace;font-size:11px;line-height:1.7">
+        <div style="display:flex;gap:4px;margin-bottom:6px">
+          <span style="padding:2px 8px;background:rgba(100,149,237,0.2);border-radius:4px;font-size:10px">Todo</span>
+          <span style="padding:2px 8px;border-radius:4px;font-size:10px;opacity:0.4">Snippet</span>
+          <span style="padding:2px 8px;border-radius:4px;font-size:10px;opacity:0.4">Command</span>
+        </div>
+        <div style="border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:4px 6px;margin-bottom:4px;opacity:0.5">Title here...</div>
+        <div style="border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:4px 6px;margin-bottom:6px;opacity:0.3;font-size:10px">Content... (snippet/command only)</div>
+        <div style="display:flex;gap:6px">
+          <span style="padding:2px 12px;background:rgba(100,149,237,0.3);border-radius:4px;font-size:10px">Add</span>
+          <span style="padding:2px 12px;border-radius:4px;font-size:10px;opacity:0.4">Cancel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Full feature list -->
+<div class="section">
+  <h3>Complete Feature List</h3>
+  <div style="font-family:monospace;font-size:11px;line-height:2">
+    <div><span style="color:cornflowerblue">●</span> <strong>Unified stream</strong> — no tabs, all content in single scroll</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Sticky pill bar</strong> — jump to section, shows counts, highlights active</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Cmd+V = todo</strong> — always adds to last expanded project (Inbox fallback)</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Unified [+] form</strong> — type picker (Todo/Snippet/Command) + title + content fields</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Collapsible sections</strong> — Todos/Snippets/Commands collapse, state persists via UserDefaults</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Global hotkey</strong> — configurable shortcut to open Noodl from anywhere</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Inline animations</strong> — slide in/fade out/flash, no toasts</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Click behaviors</strong> — todo: toggle, snippet: copy, command: run</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Context menus</strong> — copy + delete on all items, copy output on commands</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>What Gets Removed</h3>
+  <div style="font-family:monospace;font-size:11px;line-height:2">
+    <div><span style="color:#e55">✕</span> Segmented tab picker → replaced by pill bar + stream</div>
+    <div><span style="color:#e55">✕</span> Toast overlay → replaced by inline animations</div>
+    <div><span style="color:#e55">✕</span> Separate AddTodoView → merged into unified [+] form</div>
+    <div><span style="color:#e55">✕</span> Per-tab empty states → section headers are always visible</div>
+    <div><span style="color:#eea">~</span> PopoverView → major refactor to stream layout</div>
+  </div>
+</div>

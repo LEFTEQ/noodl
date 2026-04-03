@@ -1,0 +1,111 @@
+<h2>Two-Column Layout — Memory + Tools</h2>
+<p class="subtitle">Left = daily capture (ephemeral). Right = persistent tools. Which split feels right?</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>40/60 split — Memory narrow, Tools wide (Recommended)</h3>
+      <p>Memory column is a compact strip: clips, screenshot thumbnails, voice note bars. Tools column is the main workspace with todos, snippets, commands. Memory is a sidebar.</p>
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-body" style="padding:0;font-family:-apple-system,system-ui,sans-serif;font-size:11px;display:flex;height:320px">
+          <!-- LEFT: Memory -->
+          <div style="width:38%;border-right:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column">
+            <div style="padding:10px 10px 6px;border-bottom:1px solid rgba(255,255,255,0.06)">
+              <div style="font-size:9px;text-transform:uppercase;letter-spacing:0.8px;opacity:0.4;margin-bottom:4px">📎 Today's Memory</div>
+              <div style="font-size:9px;opacity:0.3">02.04.2026 · 3 clips · 2 screenshots</div>
+            </div>
+            <div style="flex:1;overflow:auto;padding:6px">
+              <div style="font-size:8px;text-transform:uppercase;opacity:0.3;margin-bottom:3px">Clips</div>
+              <div style="padding:3px 6px;margin-bottom:2px;border-radius:4px;background:rgba(255,200,50,0.06);font-size:10px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">ssh deploy@116...</div>
+              <div style="padding:3px 6px;margin-bottom:2px;border-radius:4px;font-size:10px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">const API_URL=...</div>
+              <div style="padding:3px 6px;margin-bottom:2px;border-radius:4px;font-size:10px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Fix booking flow...</div>
+              <div style="font-size:8px;text-transform:uppercase;opacity:0.3;margin-top:8px;margin-bottom:3px">Screenshots</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px">
+                <div style="aspect-ratio:16/10;background:rgba(255,255,255,0.05);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:16px;opacity:0.3">🖼</div>
+                <div style="aspect-ratio:16/10;background:rgba(255,255,255,0.05);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:16px;opacity:0.3">🖼</div>
+              </div>
+              <div style="font-size:8px;text-transform:uppercase;opacity:0.3;margin-top:8px;margin-bottom:3px">Voice</div>
+              <div style="padding:3px 6px;border-radius:4px;background:rgba(255,100,100,0.06);font-size:9px">🎙 0:42 — meeting note</div>
+            </div>
+          </div>
+          <!-- RIGHT: Tools -->
+          <div style="width:62%;display:flex;flex-direction:column">
+            <div style="padding:10px 10px 6px;display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.06)">
+              <strong style="font-size:13px">Noodl</strong>
+              <div style="display:flex;gap:8px;opacity:0.4"><span>+</span><span>⚙</span></div>
+            </div>
+            <div style="display:flex;gap:3px;padding:5px 8px;justify-content:center">
+              <span style="padding:1px 7px;background:rgba(100,149,237,0.2);border-radius:8px;font-size:9px;color:cornflowerblue">☑ 5</span>
+              <span style="padding:1px 7px;border-radius:8px;font-size:9px;opacity:0.35">📋 3</span>
+              <span style="padding:1px 7px;border-radius:8px;font-size:9px;opacity:0.35">⚡ 5</span>
+            </div>
+            <div style="flex:1;overflow:auto;padding:6px 8px;font-size:10px">
+              <div style="opacity:0.3;font-size:8px;text-transform:uppercase;letter-spacing:0.5px">☑ Todos</div>
+              <div style="padding-left:8px;margin-top:2px">▼ FixIt (2)</div>
+              <div style="padding-left:20px;opacity:0.7;font-size:10px">○ Fix geolocation</div>
+              <div style="padding-left:20px;opacity:0.7;font-size:10px">○ Update push tokens</div>
+              <div style="padding-left:8px;margin-top:2px">▸ Inbox (3)</div>
+              <div style="opacity:0.3;font-size:8px;text-transform:uppercase;letter-spacing:0.5px;margin-top:8px">📋 Snippets</div>
+              <div style="padding-left:8px;opacity:0.7;font-size:10px">SSH VPS</div>
+              <div style="padding-left:8px;opacity:0.7;font-size:10px">Docker Restart</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>50/50 split — Equal halves</h3>
+      <p>Both columns get equal space. Memory is a full experience, not a sidebar. Good if you capture a lot of screenshots and want larger thumbnails.</p>
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-body" style="padding:0;font-family:-apple-system,system-ui,sans-serif;font-size:11px;display:flex;height:200px">
+          <div style="width:50%;border-right:1px solid rgba(255,255,255,0.1);padding:10px">
+            <div style="font-size:9px;text-transform:uppercase;opacity:0.4;margin-bottom:6px">📎 Today's Memory</div>
+            <div style="padding:3px 6px;margin-bottom:2px;border-radius:4px;background:rgba(255,200,50,0.06);font-size:10px">ssh deploy@116...</div>
+            <div style="padding:3px 6px;margin-bottom:2px;border-radius:4px;font-size:10px">const API_URL=...</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px">
+              <div style="aspect-ratio:16/10;background:rgba(255,255,255,0.05);border-radius:3px;display:flex;align-items:center;justify-content:center;opacity:0.3">🖼</div>
+              <div style="aspect-ratio:16/10;background:rgba(255,255,255,0.05);border-radius:3px;display:flex;align-items:center;justify-content:center;opacity:0.3">🖼</div>
+            </div>
+          </div>
+          <div style="width:50%;padding:10px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px"><strong style="font-size:12px">Noodl</strong><span style="opacity:0.3">+ ⚙</span></div>
+            <div style="opacity:0.3;font-size:8px;text-transform:uppercase">☑ Todos</div>
+            <div style="padding-left:6px;font-size:10px;opacity:0.7">▼ FixIt (2)</div>
+            <div style="padding-left:16px;font-size:10px;opacity:0.5">○ Fix geolocation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Top/Bottom split — Memory on top, Tools below</h3>
+      <p>Memory is a compact horizontal strip at the top (clips as pills, screenshot thumbnails inline). Tools fill the rest. No vertical columns. Works better for narrow popovers.</p>
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-body" style="padding:0;font-family:-apple-system,system-ui,sans-serif;font-size:11px;height:200px;display:flex;flex-direction:column">
+          <div style="padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.1);background:rgba(255,200,50,0.03)">
+            <div style="display:flex;gap:4px;overflow-x:auto">
+              <span style="padding:2px 8px;border-radius:4px;background:rgba(255,200,50,0.1);font-size:9px;white-space:nowrap">ssh deploy...</span>
+              <span style="padding:2px 8px;border-radius:4px;background:rgba(255,200,50,0.1);font-size:9px;white-space:nowrap">const API...</span>
+              <span style="padding:2px 8px;border-radius:4px;background:rgba(100,100,255,0.1);font-size:9px">🖼</span>
+              <span style="padding:2px 8px;border-radius:4px;background:rgba(100,100,255,0.1);font-size:9px">🖼</span>
+              <span style="padding:2px 8px;border-radius:4px;background:rgba(255,100,100,0.1);font-size:9px">🎙 0:42</span>
+            </div>
+          </div>
+          <div style="flex:1;padding:8px 10px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px"><strong style="font-size:12px">Noodl</strong><span style="opacity:0.3">+ ⚙</span></div>
+            <div style="opacity:0.3;font-size:8px;text-transform:uppercase">☑ Todos</div>
+            <div style="padding-left:6px;font-size:10px;opacity:0.7">▼ FixIt (2)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

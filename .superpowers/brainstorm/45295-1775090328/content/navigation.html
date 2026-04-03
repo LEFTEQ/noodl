@@ -1,0 +1,86 @@
+<h2>How should Noodl's navigation work?</h2>
+<p class="subtitle">3 tabs in a segmented picker is getting crowded. As a quick-capture tool, every pixel counts.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Icon tabs (Recommended)</h3>
+      <p>Replace text labels with compact icons in a horizontal bar. Saves vertical space, looks cleaner. Tooltip on hover for labels.</p>
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-body" style="padding:12px;font-family:monospace;font-size:13px;line-height:1.6">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.1)">
+            <strong style="font-size:15px">Noodl</strong>
+            <div style="display:flex;gap:12px;align-items:center">
+              <span style="opacity:0.5">+</span>
+              <span style="opacity:0.5">⚙</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:2px;padding:8px 0;justify-content:center">
+            <div style="padding:4px 16px;background:rgba(100,149,237,0.2);border-radius:6px;font-size:12px">☑ Todos</div>
+            <div style="padding:4px 16px;border-radius:6px;font-size:12px;opacity:0.5">📋 Clips</div>
+            <div style="padding:4px 16px;border-radius:6px;font-size:12px;opacity:0.5">⚡ Run</div>
+          </div>
+          <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:8px">
+            <div style="opacity:0.6;font-size:11px">▼ FixIt (2)</div>
+            <div style="padding:2px 0 2px 16px;font-size:12px">○ Fix geolocation drift</div>
+            <div style="padding:2px 0 2px 16px;font-size:12px">○ Update push tokens</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Sidebar icons</h3>
+      <p>Vertical icon strip on the left (like Slack/Discord). Content area on the right. Uses horizontal space instead of vertical — more room for content.</p>
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-body" style="padding:0;font-family:monospace;font-size:13px;line-height:1.6;display:flex">
+          <div style="width:36px;border-right:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:12px">
+            <span style="font-size:14px;padding:4px;background:rgba(100,149,237,0.2);border-radius:6px">☑</span>
+            <span style="font-size:14px;padding:4px;opacity:0.4">📋</span>
+            <span style="font-size:14px;padding:4px;opacity:0.4">⚡</span>
+          </div>
+          <div style="flex:1;padding:10px 12px">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:8px">
+              <strong style="font-size:15px">Noodl</strong>
+              <div style="display:flex;gap:8px;opacity:0.5"><span>+</span><span>⚙</span></div>
+            </div>
+            <div style="opacity:0.6;font-size:11px">▼ FixIt (2)</div>
+            <div style="padding:2px 0 2px 16px;font-size:12px">○ Fix geolocation drift</div>
+            <div style="padding:2px 0 2px 16px;font-size:12px">○ Update push tokens</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>No tabs — unified stream</h3>
+      <p>Everything in one scrollable list. Todos, then Snippets section, then Commands section. No switching. Cmd+V adds based on cursor position / scroll position. Simplest, but gets long.</p>
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-body" style="padding:12px;font-family:monospace;font-size:13px;line-height:1.6">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.1)">
+            <strong style="font-size:15px">Noodl</strong>
+            <div style="display:flex;gap:8px;opacity:0.5"><span>+</span><span>⚙</span></div>
+          </div>
+          <div style="padding-top:8px">
+            <div style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:1px">Todos</div>
+            <div style="padding:2px 0 2px 8px;font-size:12px">○ Fix geolocation drift</div>
+            <div style="padding:2px 0 2px 8px;font-size:12px">○ Update push tokens</div>
+            <div style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-top:12px">Snippets</div>
+            <div style="padding:2px 0 2px 8px;font-size:12px">📋 SSH VPS</div>
+            <div style="padding:2px 0 2px 8px;font-size:12px">📋 Docker Restart</div>
+            <div style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-top:12px">Commands</div>
+            <div style="padding:2px 0 2px 8px;font-size:12px">⚡ Deploy Status</div>
+            <div style="padding:2px 0 2px 8px;font-size:12px">⚡ Crypto Logs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

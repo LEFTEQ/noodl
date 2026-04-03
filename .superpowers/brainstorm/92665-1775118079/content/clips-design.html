@@ -1,0 +1,96 @@
+<h2>Clipboard History — Clips Section</h2>
+<p class="subtitle">Cmd+V captures clipboard to a temporary buffer. Top of stream, max 10, session-persistent.</p>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">Noodl with Clips (collapsed todos)</div>
+    <div class="mockup-body" style="padding:14px;font-family:-apple-system,system-ui,sans-serif;font-size:12px;line-height:1.5">
+      <!-- Header -->
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.1)">
+        <strong style="font-size:15px">Noodl</strong>
+        <div style="display:flex;gap:10px;opacity:0.5;font-size:14px"><span>+</span><span>⚙</span></div>
+      </div>
+      <!-- Pill bar with clips -->
+      <div style="display:flex;gap:4px;padding:6px 0;justify-content:center">
+        <div style="padding:2px 10px;background:rgba(255,200,50,0.2);border-radius:10px;font-size:10px;color:#daa520;cursor:pointer">📎 3</div>
+        <div style="padding:2px 10px;border-radius:10px;font-size:10px;opacity:0.35;cursor:pointer">☑ 5</div>
+        <div style="padding:2px 10px;border-radius:10px;font-size:10px;opacity:0.35;cursor:pointer">📋 3</div>
+        <div style="padding:2px 10px;border-radius:10px;font-size:10px;opacity:0.35;cursor:pointer">⚡ 5</div>
+      </div>
+      <!-- CLIPS section -->
+      <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:0.8px">📎 Clips</span>
+          <span style="opacity:0.3;font-size:9px;cursor:pointer">Clear all</span>
+        </div>
+        <!-- Clip item 1 (newest) -->
+        <div style="padding:4px 8px;margin-bottom:2px;border-radius:6px;background:rgba(255,200,50,0.06);display:flex;align-items:center;gap:6px;cursor:pointer">
+          <span style="font-size:10px;opacity:0.4">📎</span>
+          <div style="flex:1;overflow:hidden">
+            <div style="font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">ssh deploy@116.202.15.49 "docker logs...</div>
+          </div>
+          <span style="font-size:9px;opacity:0.3">2m</span>
+          <span style="font-size:10px;opacity:0.3;cursor:pointer" title="Remove">✕</span>
+        </div>
+        <!-- Clip item 2 -->
+        <div style="padding:4px 8px;margin-bottom:2px;border-radius:6px;display:flex;align-items:center;gap:6px;cursor:pointer">
+          <span style="font-size:10px;opacity:0.4">📎</span>
+          <div style="flex:1;overflow:hidden">
+            <div style="font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">const API_URL = "https://api.example.com"</div>
+          </div>
+          <span style="font-size:9px;opacity:0.3">5m</span>
+          <span style="font-size:10px;opacity:0.3;cursor:pointer" title="Remove">✕</span>
+        </div>
+        <!-- Clip item 3 -->
+        <div style="padding:4px 8px;margin-bottom:2px;border-radius:6px;display:flex;align-items:center;gap:6px;cursor:pointer">
+          <span style="font-size:10px;opacity:0.4">📎</span>
+          <div style="flex:1;overflow:hidden">
+            <div style="font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Fix the booking flow to handle edge case...</div>
+          </div>
+          <span style="font-size:9px;opacity:0.3">12m</span>
+          <span style="font-size:10px;opacity:0.3;cursor:pointer" title="Remove">✕</span>
+        </div>
+      </div>
+      <!-- Divider -->
+      <div style="border-top:1px solid rgba(255,255,255,0.06);margin-top:8px;padding-top:8px">
+        <div style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:0.8px">☑ Todos</div>
+        <div style="opacity:0.3;font-size:10px;padding:4px 8px">▸ FixIt (2) · Inbox (3)</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="mockup">
+      <div class="mockup-header">Interaction Model</div>
+      <div class="mockup-body" style="padding:12px;font-family:monospace;font-size:11px;line-height:1.8">
+        <div><strong>Cmd+V</strong> (popover open)</div>
+        <div style="padding-left:12px;opacity:0.7">→ Captures clipboard text</div>
+        <div style="padding-left:12px;opacity:0.7">→ Adds as newest clip (top)</div>
+        <div style="padding-left:12px;opacity:0.7">→ If 10+ clips, oldest drops</div>
+        <div style="padding-left:12px;opacity:0.7">→ Slide-in animation</div>
+        <div style="margin-top:10px"><strong>Single click</strong> clip</div>
+        <div style="padding-left:12px;opacity:0.7">→ Copies text to clipboard</div>
+        <div style="padding-left:12px;opacity:0.7">→ Flash green feedback</div>
+        <div style="margin-top:10px"><strong>Double click</strong> clip</div>
+        <div style="padding-left:12px;opacity:0.7">→ Copies text to clipboard</div>
+        <div style="padding-left:12px;opacity:0.7">→ Removes from clips list</div>
+        <div style="padding-left:12px;opacity:0.7">→ Fade-out animation</div>
+        <div style="margin-top:10px"><strong>✕ button</strong></div>
+        <div style="padding-left:12px;opacity:0.7">→ Removes clip (no copy)</div>
+        <div style="margin-top:10px"><strong>Clear all</strong></div>
+        <div style="padding-left:12px;opacity:0.7">→ Removes all clips</div>
+      </div>
+    </div>
+
+    <div class="mockup" style="margin-top:12px">
+      <div class="mockup-header">Storage</div>
+      <div class="mockup-body" style="padding:12px;font-family:monospace;font-size:11px;line-height:1.8">
+        <div>File: <span style="color:cornflowerblue">_clips.md</span></div>
+        <div>Max: 10 clips</div>
+        <div>Persists across restarts</div>
+        <div>Newest first</div>
+        <div>Shows relative time (2m, 1h)</div>
+      </div>
+    </div>
+  </div>
+</div>

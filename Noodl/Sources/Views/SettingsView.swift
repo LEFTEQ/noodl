@@ -48,27 +48,27 @@ struct SettingsView: View {
             }
 
             Section("Screenshot Hotkey") {
-                HStack {
-                    Text("Take Screenshot")
-                    Spacer()
-                    if isRecordingScreenshotHotkey {
-                        Text("Press shortcut…")
-                            .foregroundStyle(.orange)
-                            .font(.caption)
-                    } else {
-                        Text(screenshotHotkey.shortcutDescription)
-                            .foregroundStyle(.secondary)
+                    HStack {
+                        Text("Take Screenshot")
+                        Spacer()
+                        if isRecordingScreenshotHotkey {
+                            Text("Press shortcut…")
+                                .foregroundStyle(.orange)
+                                .font(.caption)
+                        } else {
+                            Text(screenshotHotkey.shortcutDescription)
+                                .foregroundStyle(.secondary)
+                        }
+                        Button(isRecordingScreenshotHotkey ? "Cancel" : "Record") {
+                            isRecordingScreenshotHotkey.toggle()
+                            isRecordingHotkey = false
+                        }
+                        .controlSize(.small)
+                        if screenshotHotkey.isEnabled {
+                            Button("Clear") { screenshotHotkey.clearShortcut() }
+                                .controlSize(.small)
+                        }
                     }
-                    Button(isRecordingScreenshotHotkey ? "Cancel" : "Record") {
-                        isRecordingScreenshotHotkey.toggle()
-                        isRecordingHotkey = false
-                    }
-                    .controlSize(.small)
-                    if screenshotHotkey.isEnabled {
-                        Button("Clear") { screenshotHotkey.clearShortcut() }
-                            .controlSize(.small)
-                    }
-                }
             }
 
             Section("Startup") {
@@ -120,7 +120,7 @@ struct SettingsView: View {
             let monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
                 let mods = event.modifierFlags.intersection([.control, .option, .shift, .command])
                 guard !mods.isEmpty else { return event }
-                self.screenshotHotkey.setShortcut(flags: event.modifierFlags, code: event.keyCode)
+                screenshotHotkey.setShortcut(flags: event.modifierFlags, code: event.keyCode)
                 self.isRecordingScreenshotHotkey = false
                 return nil
             }

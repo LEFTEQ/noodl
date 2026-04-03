@@ -36,8 +36,16 @@ final class MemoryStore {
         !Calendar.current.isDateInToday(currentDate)
     }
 
+    private var started = false
+
     init(baseURL: URL) {
         self.baseURL = baseURL
+    }
+
+    /// Call from onAppear to defer heavy work out of @State init
+    func startIfNeeded() {
+        guard !started else { return }
+        started = true
         ensureTodayFolder()
         reload()
         startWatching()

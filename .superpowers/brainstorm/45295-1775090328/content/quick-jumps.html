@@ -1,0 +1,75 @@
+<h2>How should quick jumps work?</h2>
+<p class="subtitle">You want a unified stream but fast access to each section. Here are 3 approaches.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Sticky pill bar (Recommended)</h3>
+      <p>Tiny pill icons pinned at the top. Click to scroll to section. Highlights which section you're currently viewing. Almost invisible — just 20px tall.</p>
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-body" style="padding:12px;font-family:monospace;font-size:13px;line-height:1.6">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.1)">
+            <strong style="font-size:15px">Noodl</strong>
+            <div style="display:flex;gap:8px;opacity:0.5"><span>+</span><span>⚙</span></div>
+          </div>
+          <!-- Pill bar -->
+          <div style="display:flex;gap:4px;padding:6px 0;justify-content:center">
+            <div style="padding:2px 10px;background:rgba(100,149,237,0.2);border-radius:10px;font-size:10px;color:cornflowerblue">☑ 5</div>
+            <div style="padding:2px 10px;border-radius:10px;font-size:10px;opacity:0.4">📋 3</div>
+            <div style="padding:2px 10px;border-radius:10px;font-size:10px;opacity:0.4">⚡ 5</div>
+          </div>
+          <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:8px">
+            <div style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Todos</div>
+            <div style="opacity:0.6;font-size:11px">▼ FixIt (2)</div>
+            <div style="padding:2px 0 2px 16px;font-size:12px">○ Fix geolocation drift &nbsp;<span style="color:#e55;font-size:9px;background:rgba(238,85,85,0.15);padding:1px 4px;border-radius:8px">high</span></div>
+            <div style="padding:2px 0 2px 16px;font-size:12px">○ Update push tokens</div>
+            <div style="opacity:0.6;font-size:11px;margin-top:4px">▼ Inbox (3)</div>
+            <div style="padding:2px 0 2px 16px;font-size:12px;opacity:0.5">○ to make more functions</div>
+            <div style="margin-top:10px;opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Snippets</div>
+            <div style="padding:2px 0 2px 8px;font-size:12px">📋 SSH VPS &nbsp;<span style="opacity:0.4;font-size:10px">ssh deploy@116...</span></div>
+            <div style="padding:2px 0 2px 8px;font-size:12px">📋 Docker Restart &nbsp;<span style="opacity:0.4;font-size:10px">docker compose...</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Keyboard shortcuts only</h3>
+      <p>No visual nav. Use Cmd+1/2/3 to jump to Todos/Snippets/Commands. Power-user approach — zero UI overhead. Section headers act as visual anchors while scrolling.</p>
+      <div class="mockup" style="margin-top:12px">
+        <div class="mockup-body" style="padding:12px;font-family:monospace;font-size:13px;line-height:1.6">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.1)">
+            <strong style="font-size:15px">Noodl</strong>
+            <div style="display:flex;gap:8px;opacity:0.5"><span>+</span><span>⚙</span></div>
+          </div>
+          <div style="padding-top:8px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+              <span style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:1px">Todos</span>
+              <span style="opacity:0.25;font-size:9px">⌘1</span>
+            </div>
+            <div style="opacity:0.6;font-size:11px">▼ FixIt (2)</div>
+            <div style="padding:2px 0 2px 16px;font-size:12px">○ Fix geolocation drift</div>
+            <div style="padding:2px 0 2px 16px;font-size:12px">○ Update push tokens</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;margin-bottom:4px">
+              <span style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:1px">Snippets</span>
+              <span style="opacity:0.25;font-size:9px">⌘2</span>
+            </div>
+            <div style="padding:2px 0 2px 8px;font-size:12px">📋 SSH VPS</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Both — pills + keyboard</h3>
+      <p>Sticky pill bar for mouse users, Cmd+1/2/3 for keyboard users. Belt and suspenders. Slightly more complex but covers all interaction styles.</p>
+    </div>
+  </div>
+</div>

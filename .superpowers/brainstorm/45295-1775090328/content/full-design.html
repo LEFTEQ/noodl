@@ -1,0 +1,154 @@
+<h2>Noodl v2 — Full UX Design</h2>
+<p class="subtitle">Unified stream, quick capture, context-aware paste. Review each section below.</p>
+
+<!-- SECTION 1: Layout -->
+<div class="section">
+  <h3>1. Layout — Unified Stream</h3>
+  <div class="split">
+    <div class="mockup">
+      <div class="mockup-header">Current (v1) — Tabbed</div>
+      <div class="mockup-body" style="padding:10px;font-family:monospace;font-size:11px;line-height:1.5">
+        <div style="text-align:center;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.1)">
+          <strong>Noodl</strong>
+        </div>
+        <div style="display:flex;gap:2px;padding:6px 0;justify-content:center">
+          <span style="padding:2px 8px;background:rgba(100,149,237,0.2);border-radius:4px;font-size:10px">Todos</span>
+          <span style="padding:2px 8px;border-radius:4px;font-size:10px;opacity:0.3">Snippets</span>
+          <span style="padding:2px 8px;border-radius:4px;font-size:10px;opacity:0.3">Commands</span>
+        </div>
+        <div style="opacity:0.5;font-size:10px;padding-top:4px">Only one tab visible at a time</div>
+        <div style="opacity:0.5;font-size:10px">Cmd+V always → Inbox</div>
+        <div style="opacity:0.5;font-size:10px">Toast overlay for feedback</div>
+      </div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-header">New (v2) — Unified Stream</div>
+      <div class="mockup-body" style="padding:10px;font-family:monospace;font-size:11px;line-height:1.5">
+        <div style="display:flex;justify-content:space-between;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.1)">
+          <strong>Noodl</strong>
+          <span style="opacity:0.4">+ ⚙</span>
+        </div>
+        <!-- Pills -->
+        <div style="display:flex;gap:3px;padding:5px 0;justify-content:center">
+          <span style="padding:1px 8px;background:rgba(100,149,237,0.2);border-radius:8px;font-size:9px;color:cornflowerblue">☑ 5</span>
+          <span style="padding:1px 8px;border-radius:8px;font-size:9px;opacity:0.35">📋 3</span>
+          <span style="padding:1px 8px;border-radius:8px;font-size:9px;opacity:0.35">⚡ 5</span>
+        </div>
+        <!-- Stream -->
+        <div style="font-size:10px;padding-top:4px">
+          <div style="opacity:0.35;font-size:9px;text-transform:uppercase;letter-spacing:0.5px">☑ Todos</div>
+          <div style="padding-left:8px">▼ FixIt (2)</div>
+          <div style="padding-left:20px;opacity:0.7">○ Fix geolocation</div>
+          <div style="padding-left:8px">▸ Inbox (3)</div>
+          <div style="opacity:0.35;font-size:9px;text-transform:uppercase;letter-spacing:0.5px;margin-top:6px">📋 Snippets</div>
+          <div style="padding-left:8px;opacity:0.7">SSH VPS</div>
+          <div style="padding-left:8px;opacity:0.7">Docker Restart</div>
+          <div style="opacity:0.35;font-size:9px;text-transform:uppercase;letter-spacing:0.5px;margin-top:6px">⚡ Commands</div>
+          <div style="padding-left:8px;opacity:0.7">Deploy Status</div>
+          <div style="padding-left:8px;opacity:0.7">Crypto Logs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: Paste -->
+<div class="section">
+  <h3>2. Context-Aware Paste (Cmd+V)</h3>
+  <p>Paste behavior depends on which section is currently visible (scroll position) or last interacted with:</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px">
+    <div class="mockup">
+      <div class="mockup-header" style="font-size:11px">Scrolled to Todos</div>
+      <div class="mockup-body" style="padding:10px;font-size:11px;font-family:monospace">
+        <div>Cmd+V →</div>
+        <div style="margin-top:4px;color:cornflowerblue">New todo added to<br><strong>last expanded project</strong></div>
+        <div style="margin-top:6px;opacity:0.5;font-size:10px">Item slides in with animation</div>
+      </div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-header" style="font-size:11px">Scrolled to Snippets</div>
+      <div class="mockup-body" style="padding:10px;font-size:11px;font-family:monospace">
+        <div>Cmd+V →</div>
+        <div style="margin-top:4px;color:#b794f6">New snippet created<br><strong>title = 1st line</strong><br><strong>content = full text</strong></div>
+        <div style="margin-top:6px;opacity:0.5;font-size:10px">Item slides in with animation</div>
+      </div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-header" style="font-size:11px">Scrolled to Commands</div>
+      <div class="mockup-body" style="padding:10px;font-size:11px;font-family:monospace">
+        <div>Cmd+V →</div>
+        <div style="margin-top:4px;color:#f6b794">New shell command<br><strong>title = 1st line</strong><br><strong>command = full text</strong></div>
+        <div style="margin-top:6px;opacity:0.5;font-size:10px">Item slides in with animation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: Interactions -->
+<div class="section">
+  <h3>3. Interaction Model</h3>
+  <div style="font-family:monospace;font-size:12px;line-height:2">
+    <table style="width:100%;border-collapse:collapse;font-size:11px">
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
+        <td style="padding:6px 8px;opacity:0.5">Action</td>
+        <td style="padding:6px 8px;opacity:0.5">Todos</td>
+        <td style="padding:6px 8px;opacity:0.5">Snippets</td>
+        <td style="padding:6px 8px;opacity:0.5">Commands</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+        <td style="padding:6px 8px">Click row</td>
+        <td style="padding:6px 8px">Toggle done</td>
+        <td style="padding:6px 8px">Copy to clipboard</td>
+        <td style="padding:6px 8px">Run command</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+        <td style="padding:6px 8px">Cmd+V</td>
+        <td style="padding:6px 8px">Paste as todo</td>
+        <td style="padding:6px 8px">Paste as snippet</td>
+        <td style="padding:6px 8px">Paste as command</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+        <td style="padding:6px 8px">Right-click</td>
+        <td style="padding:6px 8px">Copy / Delete</td>
+        <td style="padding:6px 8px">Copy / Delete</td>
+        <td style="padding:6px 8px">Copy cmd / Copy output / Delete</td>
+      </tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+        <td style="padding:6px 8px">Cmd+V (global)</td>
+        <td colspan="3" style="padding:6px 8px">Global hotkey opens Noodl → paste lands in visible section</td>
+      </tr>
+      <tr>
+        <td style="padding:6px 8px">Feedback</td>
+        <td colspan="3" style="padding:6px 8px">Inline animations only — slide in, fade out, flash green. No toasts.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 4: New features -->
+<div class="section">
+  <h3>4. New Features Summary</h3>
+  <div style="font-family:monospace;font-size:11px;line-height:1.8">
+    <div><span style="color:cornflowerblue">●</span> <strong>Unified stream</strong> — no tabs, single scrollable view</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Sticky pill bar</strong> — click to jump to section, shows counts, highlights active</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Context-aware Cmd+V</strong> — paste lands in visible section (todo/snippet/command)</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Smart todo target</strong> — paste goes to last expanded project, not always Inbox</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Collapsible sections</strong> — each section collapsible, state persists</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Global hotkey</strong> — configurable shortcut opens Noodl from anywhere</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Inline animations</strong> — no toasts, items animate in/out for feedback</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Snippet paste</strong> — Cmd+V on snippets section creates snippet (1st line = title)</div>
+    <div><span style="color:cornflowerblue">●</span> <strong>Command paste</strong> — Cmd+V on commands section creates shell command</div>
+  </div>
+</div>
+
+<!-- SECTION 5: What's removed -->
+<div class="section">
+  <h3>5. What Changes / Gets Removed</h3>
+  <div style="font-family:monospace;font-size:11px;line-height:1.8">
+    <div><span style="color:#e55">✕</span> Segmented tab picker — replaced by pill bar + unified stream</div>
+    <div><span style="color:#e55">✕</span> Toast overlay — replaced by inline animations</div>
+    <div><span style="color:#e55">✕</span> Hardcoded Inbox paste target — now uses last expanded project</div>
+    <div><span style="color:#eea">~</span> Footer bar — simplified, shows context for current section</div>
+    <div><span style="color:#eea">~</span> PopoverView — major refactor to unified stream architecture</div>
+  </div>
+</div>
