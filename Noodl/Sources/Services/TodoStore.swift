@@ -10,6 +10,7 @@ final class TodoStore {
     var commands: [QuickCommand] = []
     var directoryURL: URL
     var lastExpandedProject: TodoProject?
+    var editingSnippetId: UUID?
 
     private var watcher: FileWatcher?
 
@@ -87,30 +88,35 @@ final class TodoStore {
         reload()
     }
 
+    /// Paste clipboard text as a new snippet with editable name.
     @discardableResult
-    func pasteAsTodo() -> String? {
+    func pasteAsSnippet() -> UUID? {
         guard let text = NSPasteboard.general.string(forType: .string),
               !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return nil }
 
-        let title = text.trimmingCharacters(in: .whitespacesAndNewlines)
-            .components(separatedBy: .newlines)
-            .first ?? text.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        let defaultTitle = String(trimmed.components(separatedBy: .newlines).first?.prefix(40) ?? trimmed.prefix(40))
 
-        let target: TodoProject
-        if let expanded = lastExpandedProject, projects.contains(where: { $0.id == expanded.id }) {
-            target = expanded
-        } else {
-            let inboxURL = directoryURL.appendingPathComponent("Inbox.md")
-            if !projects.contains(where: { $0.name == "Inbox" }) {
-                try? MarkdownParser.createEmpty(name: "Inbox", at: inboxURL)
-                reload()
-            }
-            guard let inbox = projects.first(where: { $0.name == "Inbox" }) else { return nil }
-            target = inbox
+        let snippet = Snippet(title: defaultTitle, content: trimmed)
+        snippets.insert(snippet, at: 0)
+        let snippetsURL = directoryURL.appendingPathComponent("_snippets.md")
+        try? MarkdownParser.writeSnippets(snippets, to: snippetsURL)
+
+        editingSnippetId = snippet.id
+        return snippet.id
+    }
+
+    /// Update a snippet's title (used by inline edit after paste).
+    func renameSnippet(_ snippet: Snippet, to newTitle: String) {
+        guard let index = snippets.firstIndex(where: { $0.id == snippet.id }) else { return }
+        let trimmed = newTitle.trimmingCharacters(in: .whitespaces)
+        guard !trimmed.isEmpty else { return }
+        snippets[index] = Snippet(id: snippet.id, title: trimmed, content: snippet.content)
+        let snippetsURL = directoryURL.appendingPathComponent("_snippets.md")
+        try? MarkdownParser.writeSnippets(snippets, to: snippetsURL)
+        if editingSnippetId == snippet.id {
+            editingSnippetId = nil
         }
-
-        add(title: title, priority: nil, to: target)
-        return title
     }
 
     // MARK: - Snippets
