@@ -4,9 +4,11 @@ import ServiceManagement
 struct SettingsView: View {
     var store: TodoStore
     var hotkey: GlobalHotkey
+    var screenshotHotkey: ScreenshotHotkey
     @State private var directoryPath = ""
     @State private var launchAtLogin = false
     @State private var isRecordingHotkey = false
+    @State private var isRecordingScreenshotHotkey = false
 
     var body: some View {
         Form {
@@ -35,10 +37,35 @@ struct SettingsView: View {
                     }
                     Button(isRecordingHotkey ? "Cancel" : "Record") {
                         isRecordingHotkey.toggle()
+                        isRecordingScreenshotHotkey = false
                     }
                     .controlSize(.small)
                     if hotkey.isEnabled {
                         Button("Clear") { hotkey.clearShortcut() }
+                            .controlSize(.small)
+                    }
+                }
+            }
+
+            Section("Screenshot Hotkey") {
+                HStack {
+                    Text("Take Screenshot")
+                    Spacer()
+                    if isRecordingScreenshotHotkey {
+                        Text("Press shortcut…")
+                            .foregroundStyle(.orange)
+                            .font(.caption)
+                    } else {
+                        Text(screenshotHotkey.shortcutDescription)
+                            .foregroundStyle(.secondary)
+                    }
+                    Button(isRecordingScreenshotHotkey ? "Cancel" : "Record") {
+                        isRecordingScreenshotHotkey.toggle()
+                        isRecordingHotkey = false
+                    }
+                    .controlSize(.small)
+                    if screenshotHotkey.isEnabled {
+                        Button("Clear") { screenshotHotkey.clearShortcut() }
                             .controlSize(.small)
                     }
                 }
@@ -84,6 +111,20 @@ struct SettingsView: View {
                 return nil
             }
             while isRecordingHotkey {
+                try? await Task.sleep(for: .milliseconds(100))
+            }
+            if let monitor { NSEvent.removeMonitor(monitor) }
+        }
+        .task(id: isRecordingScreenshotHotkey) {
+            guard isRecordingScreenshotHotkey else { return }
+            let monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { event in
+                let mods = event.modifierFlags.intersection([.control, .option, .shift, .command])
+                guard !mods.isEmpty else { return event }
+                self.screenshotHotkey.setShortcut(flags: event.modifierFlags, code: event.keyCode)
+                self.isRecordingScreenshotHotkey = false
+                return nil
+            }
+            while isRecordingScreenshotHotkey {
                 try? await Task.sleep(for: .milliseconds(100))
             }
             if let monitor { NSEvent.removeMonitor(monitor) }

@@ -3,6 +3,9 @@ import AppKit
 
 struct PopoverView: View {
     var store: TodoStore
+    var memoryStore: MemoryStore
+    var screenshotService: ScreenshotService
+    var voiceRecorder: VoiceRecorder
     @State private var showAddForm = false
     @State private var activeSection: NoodlSection = .todos
     @State private var keyMonitor: Any?
@@ -10,15 +13,16 @@ struct PopoverView: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            // Left column: Memory sidebar
-            MemorySidebar()
-                .frame(width: 180)
+            MemorySidebar(
+                memoryStore: memoryStore,
+                screenshotService: screenshotService,
+                voiceRecorder: voiceRecorder
+            )
+            .frame(width: 180)
 
             Divider()
 
-            // Right column: Tools
             VStack(spacing: 0) {
-                // Header
                 HStack {
                     Text("Noodl")
                         .font(.headline)
@@ -48,7 +52,6 @@ struct PopoverView: View {
                 .padding(.horizontal, 12)
                 .padding(.vertical, 10)
 
-                // Pill bar
                 PillBar(
                     todoCount: store.totalOpen,
                     snippetCount: store.snippets.count,
@@ -60,13 +63,11 @@ struct PopoverView: View {
 
                 Divider()
 
-                // Unified add form
                 if showAddForm {
                     UnifiedAddView(store: store, isShowing: $showAddForm)
                     Divider()
                 }
 
-                // Stream
                 StreamView(store: store, activeSection: $activeSection)
             }
         }

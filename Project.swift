@@ -32,6 +32,7 @@ let project = Project(
                 "CFBundleVersion": "1",
                 "LSMinimumSystemVersion": "15.0",
                 "LSUIElement": true,
+                "NSMicrophoneUsageDescription": "Noodl uses the microphone to record voice notes.",
             ]),
             sources: ["Noodl/Sources/**/*.swift"],
             resources: ["Noodl/Resources/**"],
