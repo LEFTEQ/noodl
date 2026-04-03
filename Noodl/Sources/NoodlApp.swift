@@ -4,15 +4,13 @@ import SwiftUI
 struct NoodlApp: App {
     @State private var store = TodoStore()
     @State private var hotkey = GlobalHotkey()
-    @State private var memoryStore: MemoryStore
+    @State private var memoryStore = MemoryStore(
+        baseURL: FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Documents/Work/personal/noodl")
+    )
     @State private var screenshotService = ScreenshotService()
     @State private var voiceRecorder = VoiceRecorder()
-
-    init() {
-        let home = FileManager.default.homeDirectoryForCurrentUser
-        let baseURL = home.appendingPathComponent("Documents/Work/personal/noodl")
-        _memoryStore = State(initialValue: MemoryStore(baseURL: baseURL))
-    }
+    @State private var configured = false
 
     var body: some Scene {
         MenuBarExtra {
@@ -24,9 +22,12 @@ struct NoodlApp: App {
             )
             .frame(width: 480, height: 520)
             .onAppear {
-                screenshotService.configure(memoryStore: memoryStore)
-                screenshotService.hotkey.onTrigger = { [screenshotService] in
-                    screenshotService.takeScreenshot()
+                if !configured {
+                    screenshotService.configure(memoryStore: memoryStore)
+                    screenshotService.hotkey.onTrigger = { [screenshotService] in
+                        screenshotService.takeScreenshot()
+                    }
+                    configured = true
                 }
             }
         } label: {
